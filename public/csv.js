@@ -98,14 +98,6 @@ $(document).ready(() => {
           { input: original.value },
           'json'
         );
-        /*let ej = new Ejemplo ({"id":1, "text":original.value});
-        let p = ej.save(function (err) {
-                  if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
-                  console.log(`Se ha guardado: ${c1}`);
-                });
-        Promise.all([p]).then( (value) => {   
-          mongoose.connection.close(); 
-        });*/
    });
    
    $("#1").click( () => {
@@ -139,6 +131,7 @@ $(document).ready(() => {
         'json'
       );
    });
+   
    /* botones para rellenar el textarea */
    /*$('button.filabotones').each( (_,y) => {
      $(y).click( () => { dump(`${$(y).text()}.txt`); });

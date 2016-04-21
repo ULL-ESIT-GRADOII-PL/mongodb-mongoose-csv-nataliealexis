@@ -38,7 +38,15 @@ const ejemploSchema = Schema ({
 });
 
 const Ejemplo = mongoose.model("Ejemplo", ejemploSchema);
-var idnum = 1;
+var idnum;
+var model = db.model('ejemplos', ejemploSchema);
+  model.count({}, function(err, c) {
+        if(c != 4)
+           idnum = c + 1;
+        else
+           idnum = 1;
+});
+
 var cantidad;
 
 app.get('/save', (request, response) => {
