@@ -1,8 +1,19 @@
-# Práctica 2: Comma separated values (CSV) with AJAX
+# CSV usando MongoDB
+
+## Despliegue en c9 ¡IMPORTANTE, LEER!
+
+[Despliegue](http://pl-mongo-nataliealexis-alu0100816761.c9users.io/)  
+
+Si aparece algo como esto: "No application seems to be running here!"
+- Clona el repo en tu c9, y corre el servidor con:
+- - 1) En una terminal:    $ ./mongodb
+- - 2) En otra terminal:   $ gulp server
+- - 3) Dale click a la palabra 'localhost' -> Open (La veras despues de correr gulp server)
+- Ponte en contacto con alguno de nosotros, e intentaremos activar el servidor lo mas pronto posible: 685-477-367 (Whatsapp) | 661-053-590 (Whatsapp)
 
 ## Repositorio en el que trabajamos  
 
-[Repositorio](https://github.com/alu0100816761/ajax-ecma6-modules-files-nataliealexis)  
+[Repositorio](https://github.com/alu0100816761/mongodb-mongoose-csv-nataliealexis)  
 
 ## Páginas personales  
 
@@ -11,7 +22,4 @@
 
 ## Descripción de la práctica  
 
-[Descripción](https://campusvirtual.ull.es/1516/mod/page/view.php?id=189369)
-
-## Heroku
-[Heroku](https://csv-ajax-alexisnatalie.herokuapp.com/)
+[Descripción](https://campusvirtual.ull.es/1516/mod/page/view.php?id=191191)
