@@ -87,18 +87,20 @@ app.get('/save', (request, response) => {
             idnum = idnum % 4;
           console.log("ACABO ITERACION");
       });
-  
-  
-  
-  /*var ej = new Ejemplo ({text: request.query.input});
-  var p = ej.save(function (err) {
-      if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
-        console.log(`Se ha guardado: ${c1}`);
-      });
-  Promise.all([p]).then( (value) => {   
-    mongoose.connection.close(); 
+});
+
+app.get('/descargar', (request, response) => {
+  var modelo = db.model('ejemplos', ejemploSchema);
+  modelo.findById(request.query.input.toString().repeat(24), function (err, datos) {
+    if(!err) {
+      console.log(datos);
+      response.send (datos);
+    }
+    else {
+      console.log("Error");
+      response.send ("No hay datos");
+    }
   });
-  response.render ('index', { title: 'CSV' });*/
 });
 
 app.listen(app.get('port'), () => {

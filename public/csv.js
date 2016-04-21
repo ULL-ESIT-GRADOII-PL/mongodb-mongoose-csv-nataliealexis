@@ -74,6 +74,10 @@ const handleDragOver = (evt) => {
   evt.target.style.background = "yellow";
 }
 
+const fillBd = (texto) => {
+  $("#original").val(texto.text);
+}
+
 $(document).ready(() => {
     let original = document.getElementById("original");
     if (window.localStorage && localStorage.original) {
@@ -104,10 +108,18 @@ $(document).ready(() => {
         });*/
    });
    
-   /* botones para rellenar el textarea */
-   $('button.filabotones').each( (_,y) => {
-     $(y).click( () => { dump(`${$(y).text()}.txt`); });
+   $("#1").click( () => {
+      $.get("/descargar",
+        { input: 1 },
+        fillBd,
+        'json'
+      );
    });
+   
+   /* botones para rellenar el textarea */
+   /*$('button.filabotones').each( (_,y) => {
+     $(y).click( () => { dump(`${$(y).text()}.txt`); });
+   });*/
 
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
