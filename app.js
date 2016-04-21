@@ -39,6 +39,7 @@ const ejemploSchema = Schema ({
 
 const Ejemplo = mongoose.model("Ejemplo", ejemploSchema);
 var idnum = 1;
+var cantidad;
 
 app.get('/save', (request, response) => {
   console.log("EMPIEZA ITERACION");
@@ -46,10 +47,9 @@ app.get('/save', (request, response) => {
   var modelo = db.model('ejemplos', ejemploSchema);
   modelo.count({}, function(err, c) {
            console.log('Cantidad es ' + c);
+           cantidad = c;
   });
-  Ejemplo.findById(idnum.toString().repeat(24), function(err,existeEjemplo) {
-    if (!err) {
-      if(existeEjemplo) { 
+      if(cantidad == 3) { 
         console.log("Existe el id " + idnum.toString().repeat(24));
       } else {
         var ej = new Ejemplo ({_id: idnum.toString().repeat(24), text: request.query.input});
@@ -58,12 +58,10 @@ app.get('/save', (request, response) => {
                     console.log(`Se ha guardado: ${ej}`);
                 });
         console.log("No existia");
-        Promise.all([p]).then( (value) => {   
+        /*Promise.all([p]).then( (value) => {   
           mongoose.connection.close();
-        });
+        });*/
       }
-    }
-  })
   
   idnum = (idnum + 1);
   console.log("ACABO ITERACION");
