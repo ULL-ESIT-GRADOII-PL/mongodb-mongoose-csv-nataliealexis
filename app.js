@@ -42,15 +42,36 @@ var idnum = 1;
 var cantidad;
 
 app.get('/save', (request, response) => {
+  response.render ('index', { title: 'CSV' });
   console.log("EMPIEZA ITERACION");
   console.log("Toca el id " + idnum);
+  
   var modelo = db.model('ejemplos', ejemploSchema);
   modelo.count({}, function(err, c) {
            console.log('Cantidad es ' + c);
            cantidad = c;
   });
-      if(cantidad == 3) { 
+      if(cantidad >= 3) { 
         console.log("Existe el id " + idnum.toString().repeat(24));
+        modelo.remove({_id: idnum.toString().repeat(24)}, function (err) {
+          if(!err) {
+            idnum--;
+            if(idnum == 0)
+              idnum = 4;
+             var ej = new Ejemplo ({_id: idnum.toString().repeat(24), text: request.query.input});
+             var p = ej.save(function (err) {
+                  if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
+                    console.log(`Se ha guardado: ${ej}`);
+              });
+            if(idnum == 4)
+              idnum = 0;
+            idnum++;
+          }
+          else {
+            console.log("Error eliminando el valor mas antiguo");
+          }
+        });
+        
       } else {
         var ej = new Ejemplo ({_id: idnum.toString().repeat(24), text: request.query.input});
         var p = ej.save(function (err) {
@@ -58,14 +79,17 @@ app.get('/save', (request, response) => {
                     console.log(`Se ha guardado: ${ej}`);
                 });
         console.log("No existia");
-        /*Promise.all([p]).then( (value) => {   
-          mongoose.connection.close();
-        });*/
       }
+      
+      Promise.all([p]).then( (value) => {   
+          idnum = idnum + 1;
+          if(idnum != 4)
+            idnum = idnum % 4;
+          console.log("ACABO ITERACION");
+      });
   
-  idnum = (idnum + 1);
-  console.log("ACABO ITERACION");
-  response.render ('index', { title: 'CSV' });
+  
+  
   /*var ej = new Ejemplo ({text: request.query.input});
   var p = ej.save(function (err) {
       if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
