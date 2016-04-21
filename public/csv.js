@@ -73,6 +73,17 @@ const handleDragOver = (evt) => {
   evt.preventDefault();
   evt.target.style.background = "yellow";
 }
+<script> const mongoose = require('mongoose'); </script>
+mongoose.connect('mongodb://localhost/');
+
+var Schema = mongoose.Schema;
+
+const ejemploSchema = Schema ({
+    id: Number,
+    text: String
+});
+
+const Ejemplo = mongoose.model("Ejemplo", ejemploSchema);
 
 $(document).ready(() => {
     let original = document.getElementById("original");
@@ -87,6 +98,17 @@ $(document).ready(() => {
           fillTable,
           'json'
         );
+   });
+   
+   $("#guardar").click( () => {
+        let ej = new Ejemplo ({"id":1, "text":original.value});
+        let p = ej.save(function (err) {
+                  if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
+                  console.log(`Se ha guardado: ${c1}`);
+                });
+        Promise.all([p]).then( (value) => {   
+          mongoose.connection.close(); 
+        });
    });
    
    /* botones para rellenar el textarea */
