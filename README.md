@@ -6,7 +6,7 @@
 
 Si aparece algo como esto: "No application seems to be running here!"
 - Clona el repo en tu c9, y corre el servidor con:
-- - 1) En una terminal:    $ ./mongodb
+- - 1) En una terminal:    $ ./mongod
 - - 2) En otra terminal:   $ gulp server
 - - 3) Dale click a la palabra 'localhost' -> Open (La veras despues de correr gulp server)
 - Ponte en contacto con alguno de nosotros, e intentaremos activar el servidor lo mas pronto posible: 685-477-367 (Whatsapp) | 661-053-590 (Whatsapp)
