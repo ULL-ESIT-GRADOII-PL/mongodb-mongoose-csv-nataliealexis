@@ -28,6 +28,30 @@ app.get('/test', (request, response) => {
   response.render('test', { title: 'Tests' });
 });
 
+mongoose.connect('mongodb://localhost/');
+
+var Schema = mongoose.Schema;
+
+const ejemploSchema = Schema ({
+    id: Number,
+    text: String
+});
+
+const Ejemplo = mongoose.model("Ejemplo", ejemploSchema);
+
+app.get('/save', (request, response) => {
+  
+  var ej = new Ejemplo ({text: request.query.input});
+  var p = ej.save(function (err) {
+      if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
+        console.log(`Se ha guardado: ${c1}`);
+      });
+  Promise.all([p]).then( (value) => {   
+    mongoose.connection.close(); 
+  });
+  response.render ('index', { title: 'CSV' });
+});
+
 app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );
 });
