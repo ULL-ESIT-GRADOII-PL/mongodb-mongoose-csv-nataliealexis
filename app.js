@@ -38,10 +38,31 @@ const ejemploSchema = Schema ({
 });
 
 const Ejemplo = mongoose.model("Ejemplo", ejemploSchema);
+var idnum = 1;
 
 app.get('/save', (request, response) => {
   
-  var ej = new Ejemplo ({text: request.query.input});
+  Ejemplo.findById(idnum.toString().repeat(24), function(err,existeEjemplo) {
+    if (!err) {
+      if(existeEjemplo) {
+        response.render ('index', { title: 'CSV' });
+      } else {
+        var ej = new Ejemplo ({id: idnum, text: request.query.input});
+        var p = ej.save(function (err) {
+        if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
+          console.log(`Se ha guardado: ${c1}`);
+        });
+        Promise.all([p]).then( (value) => {   
+          mongoose.connection.close(); 
+        });
+        response.render ('index', { title: 'CSV' });
+      }
+    }
+    response.render ('index', { title: 'CSV' });
+  })
+  
+  idnum = ((idnum + 1) % 4);
+  /*var ej = new Ejemplo ({text: request.query.input});
   var p = ej.save(function (err) {
       if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
         console.log(`Se ha guardado: ${c1}`);
@@ -49,7 +70,7 @@ app.get('/save', (request, response) => {
   Promise.all([p]).then( (value) => {   
     mongoose.connection.close(); 
   });
-  response.render ('index', { title: 'CSV' });
+  response.render ('index', { title: 'CSV' });*/
 });
 
 app.listen(app.get('port'), () => {
