@@ -33,7 +33,7 @@ var db = mongoose.connect('mongodb://localhost/');
 var Schema = mongoose.Schema;
 
 const ejemploSchema = Schema ({
-    id: Number,
+    name: String,
     text: String
 });
 
@@ -66,7 +66,7 @@ app.get('/save', (request, response) => {
             idnum--;
             if(idnum == 0)
               idnum = 4;
-             var ej = new Ejemplo ({_id: idnum.toString().repeat(24), text: request.query.input});
+             var ej = new Ejemplo ({_id: idnum.toString().repeat(24), name: request.query.name, text: request.query.input});
              var p = ej.save(function (err) {
                   if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
                     console.log(`Se ha guardado: ${ej}`);
@@ -81,7 +81,7 @@ app.get('/save', (request, response) => {
         });
         
       } else {
-        var ej = new Ejemplo ({_id: idnum.toString().repeat(24), text: request.query.input});
+        var ej = new Ejemplo ({_id: idnum.toString().repeat(24), name: request.query.name, text: request.query.input});
         var p = ej.save(function (err) {
                   if (err) { console.log(`Hubo algun error:\n${err}`); return err; }
                     console.log(`Se ha guardado: ${ej}`);

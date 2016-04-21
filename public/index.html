@@ -27,12 +27,18 @@
       <p><i> Ir al <a href="https://github.com/ULL-ESIT-GRADOII-PL/mongodb-mongoose-csv-nataliealexis">repo</a>.</i></p>
       <i>Write a CSV string. Click the table button. The program outputs a table with the specified data.</i>
     </div>
+    <br>
     <table>
       <tr>
         <th>CSV string:</th> <!-- autofocus attribute is HTML5 -->
         <td><textarea class="drop_zone" autofocus cols = "80" rows = "5" id="original"></textarea></td>
       </tr>
+      <tr>
+        <th>Nombre para almacenar en la BD:</th>
+        <td><textarea id="nombre" cols = "80" rows = "1"></textarea></td>
+      </tr>
     </table>
+    <br>
     <table>
       <tr>
         <th>
@@ -52,6 +58,7 @@
           </th>
         </tr>
     </table>
+    <br>
     <button type="button" id="botoncalcular">Calcular</button>
     <button id="guardar">Guardar</button><br>
     <span class="output" id="finaltable"></span>

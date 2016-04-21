@@ -76,10 +76,12 @@ const handleDragOver = (evt) => {
 
 const fillBd = (texto) => {
   $("#original").val(texto.text);
+  $("#nombre").val(texto.name);
 }
 
 $(document).ready(() => {
     let original = document.getElementById("original");
+    let nombre = document.getElementById("nombre");
     if (window.localStorage && localStorage.original) {
       original.value = localStorage.original;
     }
@@ -95,7 +97,8 @@ $(document).ready(() => {
    
    $("#guardar").click( () => {
         $.get("/save",
-          { input: original.value },
+          { input: original.value,
+            name: nombre.value},
           'json'
         );
    });
