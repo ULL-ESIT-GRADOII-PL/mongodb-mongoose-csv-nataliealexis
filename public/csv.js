@@ -116,6 +116,29 @@ $(document).ready(() => {
       );
    });
    
+   $("#2").click( () => {
+      $.get("/descargar",
+        { input: 2 },
+        fillBd,
+        'json'
+      );
+   });
+   
+   $("#3").click( () => {
+      $.get("/descargar",
+        { input: 3 },
+        fillBd,
+        'json'
+      );
+   });
+   
+   $("#4").click( () => {
+      $.get("/descargar",
+        { input: 4 },
+        fillBd,
+        'json'
+      );
+   });
    /* botones para rellenar el textarea */
    /*$('button.filabotones').each( (_,y) => {
      $(y).click( () => { dump(`${$(y).text()}.txt`); });
